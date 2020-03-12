@@ -9,10 +9,11 @@ namespace cw2
     public class Student
     {
 
-        string firstName, lastName, email, mothersName, fathersName;
+        string firstName, lastName, email, mothersName, fathersName, index;
         DateTime birthDate;
+        Studies studies;
 
-        Student(string firstName, string lastName, DateTime birthDate, string email, string mothersName, string fathersName)
+        public Student(string firstName, string lastName, Studies studies, string index, DateTime birthDate, string email, string mothersName, string fathersName)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -20,6 +21,8 @@ namespace cw2
             this.email = email;
             this.mothersName = mothersName;
             this.fathersName = fathersName;
+            this.index = index;
+            this.studies = studies;
         }
 
 
@@ -30,6 +33,14 @@ namespace cw2
         [XmlAttribute(AttributeName = "InnaNazwa")]
         //[JsonPropertyName("LastName")]
         public string Nazwisko { get; set; }
+
+
+        public string Index { get; set; }
+
+        public override string ToString()
+        {
+            return $"{firstName}{" "}{ lastName}{" "}{ studies}{" "}{ index}{" "}{ birthDate}{" "}{ email}{" "}{ mothersName} {" "}{ fathersName}";
+        }
 
     }
 

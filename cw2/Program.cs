@@ -1,6 +1,10 @@
-﻿using System;
+﻿//Pliki do odczytu i zapisu sa argumentamii programu
+//hashSet zle wykonuje metode equals i nie dodaje nowych elementow
+
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace cw2
 {
@@ -9,7 +13,8 @@ namespace cw2
         static void Main(string[] args)
         {
 
-            var pathOut = @"C:\Users\s18928\Desktop\cw2\log.txt";
+            //var pathOut = @"C:\Users\s18928\Desktop\cw2\log.txt";
+            var pathOut = @"C:\Users\kasia\OneDrive\Pulpit\studia\IIrok\II_SEM\APBD\cw2\log.txt";
 
 
             if (File.Exists(pathOut))
@@ -24,25 +29,42 @@ namespace cw2
 
                     try
                     {
-                        var path = @"C:\Users\s18928\Desktop\dane.csv";
+                        //var path = @"C:\Users\s18928\Desktop\dane.csv";
+                        var path = @"C:\Users\kasia\OneDrive\Pulpit\studia\IIrok\II_SEM\APBD\cw2\daneTest.csv";
 
                         var lines = File.ReadLines(path);
 
                         var hash = new HashSet<Student>(new OwnComparer());
+                        var hashStudies = new HashSet<Studies>(new StudiesComparer());
 
                         foreach (var line in lines)
                         {
                             var data = line.Split(",");
-                            Console.WriteLine(line);
 
-                            //if (data.Length != 9)
-                            //    Console.WriteLine(line);
-                            //else
-                            //{
+                            Regex regex = new Regex("([ ],)+");
 
-                            //    hash.Add(new Student(line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8], line[9]));
-                            //}
+                            if (data.Length != 9 || regex.IsMatch(line) || line.Length <= 8)
+                            {
+                                w.Write(line + '\n');
+                            }
+                            else
+                            {
+                                var studies = new Studies(data[2], data[3]);
+                                hashStudies.Add(studies);
 
+                                var student = new Student(data[0], data[1], studies, data[4], DateTime.Parse(data[5]), data[6], data[7], data[8]);
+
+
+                                if (!hash.Add(student))
+                                    w.Write(line + '\n');
+
+                            }
+
+                        }
+
+                        foreach (var i in hash)
+                        {
+                            Console.WriteLine(i);
                         }
 
                     }
