@@ -8,7 +8,8 @@ namespace cw2
     {
         public bool Equals(Student x, Student y)
         {
-            return StringComparer.InvariantCultureIgnoreCase.Equals($"{x.Imie} {x.Nazwisko}", $"");
+            return StringComparer.InvariantCultureIgnoreCase.Equals($"{x.Name} {x.LastName}{x.Index}"
+                , $"{y.Name} {y.LastName}{y.Index}");
         }
 
         public int GetHashCode(Student obj)
@@ -16,7 +17,7 @@ namespace cw2
            
             return StringComparer
                 .InvariantCultureIgnoreCase
-                .GetHashCode($"{obj.Imie} {obj.Nazwisko} ");
+                .GetHashCode($"{obj.Name} {obj.LastName} {obj.Index}");
         }
     }
 

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
 namespace cw2
@@ -13,33 +15,32 @@ namespace cw2
         DateTime birthDate;
         Studies studies;
 
-        public Student(string firstName, string lastName, Studies studies, string index, DateTime birthDate, string email, string mothersName, string fathersName)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.birthDate = birthDate;
-            this.email = email;
-            this.mothersName = mothersName;
-            this.fathersName = fathersName;
-            this.index = index;
-            this.studies = studies;
-        }
+        [XmlAttribute(AttributeName = "Index")]
+        public string Index { get => index; set => index = value; }
+
+        [XmlElement(ElementName = "Name")]
+        public string Name { get => firstName; set => firstName = value; }
+
+        
+        [JsonPropertyName("LastName")]
+        public string LastName { get => lastName; set => lastName = value; }
+
+        public string Email { get => email; set => email = value; }
+
+        public string MothersName { get => mothersName; set => mothersName = value; }
+
+        public string FathersName { get => fathersName; set => fathersName = value; }
+
+        public DateTime BirthDate { get => birthDate; set => birthDate = value; }
+
+        public Studies Studies { get => studies; set => studies = value; }
 
 
-
-        [XmlElement(ElementName = "InneNazwa")]
-        public string Imie { get; set; }
-
-        [XmlAttribute(AttributeName = "InnaNazwa")]
-        //[JsonPropertyName("LastName")]
-        public string Nazwisko { get; set; }
-
-
-        public string Index { get; set; }
+        
 
         public override string ToString()
         {
-            return $"{firstName}{" "}{ lastName}{" "}{ studies}{" "}{ index}{" "}{ birthDate}{" "}{ email}{" "}{ mothersName} {" "}{ fathersName}";
+            return $"{firstName}{" "}{ lastName}{" "}{ studies}{" "}{ Index}{" "}{ birthDate}{" "}{ email}{" "}{ mothersName} {" "}{ fathersName}";
         }
 
     }

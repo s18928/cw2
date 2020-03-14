@@ -8,18 +8,14 @@ namespace cw2
     {
         string name, mode;
 
-        public Studies(string name, string mode)
-        {
-            this.name = name;
-            this.mode = mode;
-        }
+       
 
         public override string ToString()
         {
             return $"{name}{" "}{mode}";
         }
 
-        public string Name { get; set; }
-        public string Mode { get; set; }
+        public string Name { get => name; set => name = value; }
+        public string Mode { get => mode; set => mode = value; }
     }
 }
