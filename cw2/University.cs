@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace cw2
 {
-    
+   
     [Serializable]
     [Newtonsoft.Json.JsonObject(Title = "University")]
     public class University

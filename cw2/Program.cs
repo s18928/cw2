@@ -29,6 +29,7 @@ namespace cw2
                 path = @"C:\Users\kasia\OneDrive\Pulpit\studia\IIrok\II_SEM\APBD\cw2\dane.csv";
                 pathDes = @"C:\Users\kasia\OneDrive\Pulpit\studia\IIrok\II_SEM\APBD\cw2\data.xml";
                 format = "xml";
+
             }
 
             var pathOut = @"C:\Users\kasia\OneDrive\Pulpit\studia\IIrok\II_SEM\APBD\cw2\log.txt";
@@ -107,7 +108,8 @@ namespace cw2
                         }
                         else if (format == "json")
                         {
-                            SerializeData(university, new JsonSerializer<University>(), fileStream);
+                            
+                            SerializeData(new { University = university }, new JsonSerializer<Object>(), fileStream);
                         }
  
 
@@ -123,7 +125,7 @@ namespace cw2
         }
 
 
-        static void SerializeData(University hash, ISerializer<University> serializer, Stream output)
+        static void SerializeData<T>(T hash, ISerializer<T> serializer, Stream output)
         {
             serializer.Serialize(hash, output);
         }
